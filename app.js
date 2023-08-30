@@ -20,17 +20,17 @@ function selectCharacter(){
 }
 
 function getEventFromHash(){
-    const name = window.location.hash.slice(1);
-    /*if(name.includes("%20")){
+    let name = window.location.hash.slice(1);
+
+    if(name.includes("%20")){
         name = name.replaceAll("%20", " ");
-
         console.log("eventhash ", name);
-    }*/
-
+    }
     const selectedCharacter = state.characters.find((character) => {
+
         return character.name === name;
     })
-
+    console.log(selectedCharacter);
     state.selectedCharacter = selectedCharacter
     console.log(state)
 }
@@ -46,12 +46,9 @@ async function getOneCharacter(){
     const oneCharData = await characterdata.json();
     state.selectedCharacter = oneCharData;
     console.log("state --> ", state);
-    /*const birthday = state.selectedCharacter.map((birth_year) => {
-        console.log(birth_year);
-        return `<p> ${ability.birth_year}</p>`;
-    })*/
-    
-    charDiv.innerHTML = `<h1>${state.selectedCharacter.name}</h1>`
+    charDiv.innerHTML = `<h2>${state.selectedCharacter.name}</h2>
+    <p>Born on: ${state.selectedCharacter.birth_year}</p>
+    <p>Height: ${state.selectedCharacter.height}</p>`
     
 }
 
